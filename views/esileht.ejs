@@ -56,6 +56,17 @@
                     <img src="./assets/Shadow.png" class="vari" alt="">
                 </div>
             </div>
+            <div class="row">
+                <% for (let i = 0; i < matkad.length; i++) { %>
+                    <div class="matk">
+                        <img class="matkapilt" src="<%=matkad[i].pildiUrl %>" />
+                        <h3><%=matkad[i].nimetus %></h3>
+                        <p><%=matkad[i].kirjeldus %></p>
+                        <p>Osalejaid: <%=matkad[i].osalejad.length %> </p>
+                        <a href="<%='/matk/' + i %>" >Loe edasi ...</a>
+                    </div>
+                <% } %>
+            </div>
         </div>
     </div>
 

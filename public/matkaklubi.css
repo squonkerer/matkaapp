@@ -144,6 +144,10 @@ body {
     cursor: pointer;
 }
 
+.matkapilt {
+    width: 60%;
+}
+
 
 
 @media screen and (min-width: 992px) {
