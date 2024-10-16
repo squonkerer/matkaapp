@@ -156,4 +156,34 @@ body {
     }
 }
 
+.button {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  
+  .button:hover {
+    background-color: #00b368;
+  }
+  
 
+  
+  .image {
+      width: 100%;
+      max-width: 300px;
+  }
+  
+  .item {
+      margin: 10px;
+  }
+
+.vali {
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+    gap: 10px;
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include("./partials/header.ejs") %>
+        <title>Confirmation</title>
+    </head>
+    <body>
+        <div class="container">
+            <%- include("./partials/menu.ejs")%>
+            <div class="row">
+                <h1> Registered</h1>
+            </div>
+            <div>
+                <%= name %>, thank you for registration <%= matk.nimetus%>
+            </div>
+            <div>
+                total registrations <%= matk.osalejad.length %>
+            </div>
+        </div>
+    </body>
+</html>

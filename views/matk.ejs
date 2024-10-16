@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="matkaklubi.css">
-</head>
-<body>
+    <head>
+        <title>matk</title>
+        <%- include("./partials/header.ejs") %>
+    </head>
+    <body>
 
-    <h1><%= matk.nimetus %></h1>
+        <%- include("./partials/menu.ejs")%>
 
-    <img class="matkapilt" src="<%=matk.pildiUrl %>" />
-    
-    <p><%=matk.kirjeldus %></p>
-    <p>Osalejaid: <%=matk.osalejad.length %> </p>                        
+        <h1><%= matk.nimetus + ' - ' + id %></h1>
 
-    <a href="###">Registreeru</a>
-    
-</body>
+        <img class="matkapilt" src="<%=matk.pildiUrl %>" />
+        
+        <p><%=matk.kirjeldus %></p>
+        <p>Osalejaid: <%=matk.osalejad.length %> </p>                        
+
+
+        <form class="register" method="post" action="/register">
+            <div class="vali">
+                <label for="name">Name</label>
+                    <input type="text" name="name" placeholder="name">
+                <label for="email">eMail</label>
+                    <input type="text" name="email" placeholder="email">
+                    <input type="hidden" name="matkaIndex" value="<%= id %>">
+                    <input type="submit" value="Register">
+            </div>
+        </form>
+        <div class="jalus">
+
+        </div>
+    </body>
 </html>
