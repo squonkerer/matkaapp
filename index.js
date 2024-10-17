@@ -13,9 +13,6 @@ const {lisaMatk} = require("./model")
 function news(req, res) {
     res.render("news", {data: data})
 }
-function newsSingle(req, res) {
-    res.render("newsSingle", {data: data})
-}
 
 function kontakt(req, res) {
     res.render("kontakt", {messages: messages})
@@ -132,10 +129,20 @@ app.post('/register', (req, res) => {
 })
 
 app.get('/', (req, res)=> { res.render("esileht", {matkad: matkad}) })
-app.get('/matk/:matkId', (req, res) => {
+/*app.get('/matk/:matkId', (req, res) => {
     const matkaIndex = req.params.matkId
     res.render("matk", { matk: matkad[matkaIndex], id: matkaIndex }) 
-})
+})*/
+app.get('/matk/:id', (req, res) => {
+    const matkIndex = req.params.id;
+    const matk = matkad[matkIndex];
+
+    if (matk) {
+        res.render('matk', { matk, id: matkIndex });
+    } else {
+        res.status(404).send('Matk not found');
+    }
+});
 
 app.get('/api/lisaMatk', (req, res)=>{
     const uusMatk = {
