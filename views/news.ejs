@@ -14,10 +14,9 @@
                     <h2><%= data[i].title %></h2>
                     <p><%= data[i].description %></p>
                     <img class="image" src="<%= data[i].imageUrl %>" alt="<%= data[i].title %>"/>
-                    <button class="button" onclick="window.location.href='<%= data[i].buttonUrl %>'">Read Closer</button>
+                    <button class="button" onclick="window.location.href='/news/<%= i %>'">Read Closer</button>
                 </div>
             <% } %>
         </div>
-    
     </body>
   </html>

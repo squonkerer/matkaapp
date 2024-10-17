@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include("./partials/header.ejs") %>
+        <title><%= news.title %></title>
+    </head>
+    <body>
+        <div class="container">
+            <%- include("./partials/menu.ejs")%>
+            <div class="item">
+                <h1><%= news.title %></h1>
+                <p><%= news.description %></p>
+                <img class="image" src="<%= news.imageUrl %>" alt="<%= news.title %>"/>
+                <button class="button" onclick="window.location.href='<%= news.buttonUrl %>'">Back to news</button>
+            </div>
+        </div>
+    </body>
+</html>

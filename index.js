@@ -1,21 +1,25 @@
 const express = require('express')
 const ejs = require('ejs')
 const path = require("path")
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 const app = express()
 //app.use(express.urlencoded())
 app.use(express.urlencoded({ extended: true }))
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+const {lisaMatk} = require("./model")
+
 function news(req, res) {
     res.render("news", {data: data})
+}
+function newsSingle(req, res) {
+    res.render("newsSingle", {data: data})
 }
 
 function kontakt(req, res) {
     res.render("kontakt", {messages: messages})
 }
-
 
 const matk1 = {
     nimetus: "Sügismatk Kõrvemaal",
@@ -46,14 +50,14 @@ const data1 = {
     title: 'Test1',
     imageUrl: '/assets/Butterfly.png',
     description: 'This is a short description',
-    buttonUrl: '/'
+    buttonUrl: '/news'
   };
 
 const data2 = {
     title: 'Test2',
     imageUrl: '/assets/Butterfly2.png',
     description: 'This is a short description',
-    buttonUrl: '/'
+    buttonUrl: '/news'
   };
 
 const data = [
@@ -63,10 +67,9 @@ const data = [
         title: 'Test3',
         imageUrl: '/assets/Hiker.png',
         description: 'This is a short description',
-        buttonUrl: '/',
+        buttonUrl: '/news',
     }
 ]
-
 
 const messages = []
 
@@ -94,12 +97,20 @@ function writeMessage(name, text) {
     console.log(messages)
 }
 
-
-
 app.get('/news', news)
 app.get('/kontakt', kontakt)
-//app.get('/test', (req, res) => {res.end('kõik töötab!')})
 app.use('/', express.static("public"))
+
+app.get('/news/:id', (req, res) => {
+    const newsIndex = req.params.id;
+    const news = data[newsIndex];
+
+    if (news) {
+        res.render('newsSingle', { news });
+    } else {
+        res.status(404).send('Story not found');
+    }
+});
 
 app.post('/newMessage', (req, res) => {
     console.log(req.body)
@@ -120,11 +131,18 @@ app.post('/register', (req, res) => {
     res.render('regConfirm', {matk: matkad[req.body.matkaIndex], name: req.body.name})
 })
 
-
 app.get('/', (req, res)=> { res.render("esileht", {matkad: matkad}) })
 app.get('/matk/:matkId', (req, res) => {
     const matkaIndex = req.params.matkId
     res.render("matk", { matk: matkad[matkaIndex], id: matkaIndex }) 
+})
+
+app.get('/api/lisaMatk', (req, res)=>{
+    const uusMatk = {
+        nimetus : req.query.nimi
+    }
+    lisaMatk(uusMatk)
+    res.end('added')
 })
 
 app.listen(PORT)
