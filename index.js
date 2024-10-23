@@ -6,9 +6,9 @@ const app = express()
 //app.use(express.urlencoded())
 app.use(express.urlencoded({ extended: true }))
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+app.set("view engine", "ejs"); 
 
-const {lisaMatk} = require("./model")
+const {lisaMatk, registerMatkale, addRegistation} = require("./model")
 
 function news(req, res) {
     res.render("news", {data: data})
@@ -70,7 +70,7 @@ const data = [
 
 const messages = []
 
-function registerMatkale(name, email, matkaIndex) {
+/*function registerMatkale(name, email, matkaIndex) {
     if (matkaIndex > matkad.length){
         console.log('wrong index')
         return
@@ -83,7 +83,7 @@ function registerMatkale(name, email, matkaIndex) {
     }
     matk.osalejad.push(uusMatkaja)
     console.log(matkad)
-}
+}*/
 
 function writeMessage(name, text) {
     const newMessage = {
@@ -151,5 +151,14 @@ app.get('/api/lisaMatk', (req, res)=>{
     lisaMatk(uusMatk)
     res.end('added')
 })
+/*app.get('/api/newRegistation', (req, res) => {
+    const newRegistation = {
+        matkIndex: req.query.matkaIndex,
+        name: req.query.name,
+        email: req.query.email,
+    }
+    addRegistation(newRegistation)
+    res.render('registered')
+})*/
 
 app.listen(PORT)
